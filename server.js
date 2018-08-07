@@ -5,7 +5,7 @@ const cors = require('cors')
 var parseString = require('xml2js').parseString;
 
 // app.use(cors());
-let cors = require('cors');
+// let cors = require('cors');
 app.use(cors({ origin: "*" }));
 // app.options('*', cors())
 
