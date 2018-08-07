@@ -1,0 +1,73 @@
+.content {
+    margin: 40px 32px;
+  }
+  
+  .row {
+    align-items:center;
+    display: grid;
+    grid-gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    padding: 8px;
+  
+    .content-test-form &:last-of-type > .col:last-of-type {
+      align-self: flex-start;
+      padding-top: 8px;
+    }
+  }
+  
+  .col {
+    position: relative;
+  
+    > .mat-input-container {
+      display: block;
+    }
+  }
+   
+  .mat-raised-button {
+    width: 100%;
+  
+    .mat-select + & {
+      margin-top: 24px;
+    }
+  }
+  
+  .mat-select {
+    display: block;
+  }
+  
+  pre {
+    background-color: #e0e0e0;
+    border-radius: 3px;
+    display: block;
+    font: 11px/1.5 Monospaced, monospace;
+    margin: 8px 0;
+    min-height: 16px;
+    padding: 4px 8px;
+    white-space: normal;
+  }
+  
+  .card {
+    max-width: 180px;
+   // height: 150px;
+  }
+  
+  .noresult{
+    max-width: 70%;
+    display:block;
+    margin:auto; 
+  }
+  
+  .masonry-item {
+  margin : 0 10px 10px 10px;
+  background-color: #f1f1f1;
+  background-size: cover;
+  width: 180px;
+  }
+  
+  // mat-card{
+  //   background-color: #F6EFFF;
+  // }
+  
+  mat-card-content{
+  font-size: 12px;
+  }

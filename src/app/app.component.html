@@ -1,20 +1,75 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>book</mat-icon> ZOEKEN IN DE CATALOGUS </ng-template>
+    <form novalidate class="content content-test-form" #form="ngForm" (ngSubmit)="form.valid && submitForm(form)">
+      <section class="row">
+        <div class="col">
+          <mat-input-container>
+            <input matInput matKeyboard placeholder="Zoekterm" name="zoekterm" [(ngModel)]="zoekValue" (enterClick)="submitForm(form)">
+          </mat-input-container>
+        </div>
+      </section>
+      <section class="row">
+        <button mat-raised-button type="submit" aria-label="Submit form">
+          ZOEKEN
+        </button>
+      </section>
+    </form>
+    <div>
+      <div *ngIf="resultaten.length > 0 as value; else noResult">
+        <!-- <div class="row">-->
+        <ngx-masonry [options]="{ transitionDuration: '1s' }" [useImagesLoaded]="true">
+          <ngxMasonryItem class="masonry-item" *ngFor="let resultaat of resultaten">
+            <!--  <div class="col">-->
+            <mat-card class="card">
+              <mat-card-header>
+                <mat-card-title class="title">{{resultaat.titles[0].title[0]._}}</mat-card-title>
+                <mat-card-subtitle class="subtitle" *ngIf="isUndefined(resultaat.authors) as value; else elseBlock">
+                </mat-card-subtitle>
+                <ng-template #elseBlock>
+                  <mat-card-subtitle>
+                    {{ resultaat.authors[0]['main-author'][0]._}}
+                  </mat-card-subtitle>
+                </ng-template>
+              </mat-card-header>
 
+              <img mat-card-image src="{{getUrl(resultaat)}}" alt="CoverImage">
+              <mat-card-content>
+
+                {{resultaat.summaries? resultaat.summaries[0].summary[0]._ : ""}}
+              </mat-card-content>
+              <mat-card-actions>
+                <a href="{{resultaat['detail-page']}}" target="_blank" mat-button>MEER INFO</a>
+              </mat-card-actions>
+              <!-- <div *ngIf="isArray(resultaat.types.type) as value; else elseBlockType">
+                <mat-chip-list>
+                  <mat-chip *ngFor="let t of resultaat.types.type" selected="true" color="warn">{{t}}</mat-chip>
+                </mat-chip-list>
+              </div>
+              <ng-template #elseBlockType>
+                <div>
+                  <mat-chip-list>
+                    <mat-chip selected="true" color="warn"> {{resultaat.types.type}}
+                    </mat-chip>
+                  </mat-chip-list>
+                </div>
+              </ng-template>-->
+            </mat-card>
+            <!--  </div>-->
+          </ngxMasonryItem>
+        </ngx-masonry>
+        <!-- </div>-->
+      </div>
+      <ng-template #noResult>
+        <div *ngIf="!first">
+          <img class="noresult" src="assets/noresultTextDown.png">
+        </div>
+      </ng-template>
+    </div>
+    <div>
+      <div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
