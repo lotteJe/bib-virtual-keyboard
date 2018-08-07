@@ -8,7 +8,7 @@ app.use(cors());
 
 app.options('*', cors())
 
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + '/dist/bibVirtualKeyboard'));
 
 app.listen(process.env.PORT || 8080);
 
