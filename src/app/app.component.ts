@@ -55,7 +55,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
     if (typeof this._zoekterm !== "undefined") {
       this._dataService.search(this._zoekterm)
-        .subscribe(response => {          
+        .subscribe(response => {
+          console.log(response);
           if (response.aquabrowser.results !== undefined) {
             this.resultaten = response.aquabrowser.results[0].result;
           }
@@ -103,5 +104,13 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     else
       return ("assets/noimage.png");
+  }
+
+  getAuthor(a: any) {
+    if (a.authors[0]['main-author'] != undefined) {
+      return a.authors[0]['main-author'][0]._;
+    }
+    else
+      return a.authors[0].author[0]._;
   }
 }
