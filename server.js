@@ -10,9 +10,7 @@ app.options('*', cors())
 
 app.use(express.static(__dirname + '/dist'));
 
-app.listen(8000, () => {
-    console.log('Server started!');
-});
+app.listen(process.env.PORT || 8080);
 
 app.route('/api/:search').get((req, res) => {
     var url  = 'http://gent.staging.aquabrowser.be/api/v1/search/?q=' + req.params['search'] + '&authorization='+ process.env.API_KEY;
