@@ -15,14 +15,16 @@ app.listen(process.env.PORT || 8080);
 
 app.route('/api/:search').get((req, res) => {
     console.log("CALL ONTVANGEN");
-    console.log(url);
     var url = 'http://gent.staging.aquabrowser.be/api/v1/search/?q=' + req.params['search'] + '&authorization=' + process.env.API_KEY;
+    console.log(url);
     request.get(url, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             console.log("CALL GELUKT");
             parseString(body, function (err, result) {
                 res.send(result);
             });
+        } else {
+            console.log(error);
         }
     });
 
