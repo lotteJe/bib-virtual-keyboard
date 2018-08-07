@@ -55,10 +55,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
     if (typeof this._zoekterm !== "undefined") {
       this._dataService.search(this._zoekterm)
-        .subscribe(response => {
-          if (response.aquabrowser.results[0].result !== undefined) {
+        .subscribe(response => {          
+          if (response.aquabrowser.results !== undefined) {
             this.resultaten = response.aquabrowser.results[0].result;
-            console.log(this.resultaten);
           }
           else {
             this.resultaten.length = 0;
