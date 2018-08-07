@@ -109,9 +109,8 @@ var AppComponent = /** @class */ (function () {
         if (typeof this._zoekterm !== "undefined") {
             this._dataService.search(this._zoekterm)
                 .subscribe(function (response) {
-                if (response.aquabrowser.results[0].result !== undefined) {
+                if (response.aquabrowser.results !== undefined) {
                     _this.resultaten = response.aquabrowser.results[0].result;
-                    console.log(_this.resultaten);
                 }
                 else {
                     _this.resultaten.length = 0;
