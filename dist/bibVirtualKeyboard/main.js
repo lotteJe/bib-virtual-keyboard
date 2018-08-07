@@ -374,7 +374,7 @@ __webpack_require__.r(__webpack_exports__);
 var environment = {
     production: false
 };
-var BACKEND_URL = null;
+var BACKEND_URL = "https://bib-virtual-keyboard.herokuapp.com";
 /*
  * In development mode, to ignore zone related error stack frames such as
  * `zone.run`, `zoneDelegate.invokeTask` for easier debugging, you can
