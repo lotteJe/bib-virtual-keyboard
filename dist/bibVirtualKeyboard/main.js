@@ -293,7 +293,7 @@ var DataService = /** @class */ (function () {
         this.http = http;
     }
     DataService.prototype.search = function (search) {
-        var url = 'http://localhost:8000/api/' + search;
+        var url = 'http://localhost:8080/api/' + search;
         return this.http.get(url);
     };
     DataService = __decorate([
