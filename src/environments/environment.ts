@@ -6,7 +6,7 @@ export const environment = {
   production: false
 };
 
-export const BACKEND_URL = null;
+export const BACKEND_URL = "https://bib-virtual-keyboard.herokuapp.com";
 
 /*
  * In development mode, to ignore zone related error stack frames such as

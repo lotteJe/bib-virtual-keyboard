@@ -2,4 +2,4 @@ export const environment = {
   production: true
 };
 
-export const BACKEND_URL = "http://bib-virtual-keyboard.herokuapp.com/";
+export const BACKEND_URL = "https://bib-virtual-keyboard.herokuapp.com/";
