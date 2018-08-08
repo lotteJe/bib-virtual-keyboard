@@ -29,18 +29,17 @@
                 </mat-card-subtitle>
                 <ng-template #elseBlock>
                   <mat-card-subtitle>
-                   {{getAuthor(resultaat)}}
+                    {{getAuthor(resultaat)}}
                   </mat-card-subtitle>
                 </ng-template>
               </mat-card-header>
-
               <img mat-card-image src="{{getUrl(resultaat)}}" alt="CoverImage">
               <mat-card-content>
-
                 {{resultaat.summaries? resultaat.summaries[0].summary[0]._ : ""}}
               </mat-card-content>
               <mat-card-actions>
-                <a href="{{resultaat['detail-page']}}" target="_blank" mat-button>MEER INFO</a>
+                <!-- <a href="{{resultaat['detail-page']}}" target="_blank" mat-button>MEER INFO</a> -->
+                <button (click)="openModal('custom-modal',resultaat['detail-page'])" mat-button>MEER INFO</button>
               </mat-card-actions>
               <!-- <div *ngIf="isArray(resultaat.types.type) as value; else elseBlockType">
                 <mat-chip-list>
@@ -60,6 +59,15 @@
           </ngxMasonryItem>
         </ngx-masonry>
         <!-- </div>-->
+        <modal id="custom-modal">
+          <div class="modal">
+            <div class="modal-body">
+              <iframe id="frame" frameborder="0" width="100%" height="100%"></iframe>
+              <button (click)="closeModal('custom-modal');" id="close"><mat-icon>close</mat-icon></button>
+            </div>
+          </div>
+          <div class="modal-background"></div>
+        </modal>
       </div>
       <ng-template #noResult>
         <div *ngIf="!first">
