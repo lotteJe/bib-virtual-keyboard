@@ -8,8 +8,8 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   search(search: string): Observable<any> {
-    const url = 'http://localhost:8080' + "/api/" + search;
-        // const url = BACKEND_URL + "/api/" + search;
+    // const url = 'http://localhost:8080' + "/api/" + search;
+    const url = BACKEND_URL + "/api/" + search;
     return this.http.get(url);
   }
 }

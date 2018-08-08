@@ -300,6 +300,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataService", function() { return DataService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/esm5/http.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -311,13 +312,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var DataService = /** @class */ (function () {
     function DataService(http) {
         this.http = http;
     }
     DataService.prototype.search = function (search) {
-        var url = 'http://localhost:8080' + "/api/" + search;
-        // const url = BACKEND_URL + "/api/" + search;
+        // const url = 'http://localhost:8080' + "/api/" + search;
+        var url = _environments_environment__WEBPACK_IMPORTED_MODULE_2__["BACKEND_URL"] + "/api/" + search;
         return this.http.get(url);
     };
     DataService = __decorate([
