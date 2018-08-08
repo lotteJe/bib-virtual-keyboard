@@ -20,13 +20,16 @@ import { IKeyboardLayouts, keyboardLayouts, MAT_KEYBOARD_LAYOUTS, MatKeyboardMod
 import { AppComponent } from './app.component';
 
 import { DataService } from './data.service';
+import { ModalService } from './modal.service';
 import { LOCALE_ID } from '@angular/core';
 
 import { NgxMasonryModule } from 'ngx-masonry';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ModalComponent
   ],
   imports: [
     // Angular modules
@@ -52,7 +55,8 @@ import { NgxMasonryModule } from 'ngx-masonry';
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'nl-BE' },
-    DataService
+    DataService,
+    ModalService
   ],
   bootstrap: [
     AppComponent

@@ -3,6 +3,8 @@ import { Component, Inject, LOCALE_ID, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IKeyboardLayout, MatKeyboardComponent, MatKeyboardRef, MatKeyboardService } from '@ngx-material-keyboard/core';
 import { DataService } from './data.service';
+import { ModalService } from './modal.service';
+
 
 @Component({
   selector: 'app-root',
@@ -38,7 +40,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   constructor(private _keyboardService: MatKeyboardService,
-    @Inject(LOCALE_ID) public locale, private _dataService: DataService
+    @Inject(LOCALE_ID) public locale, private _dataService: DataService,
+    private _modalService: ModalService
   ) { }
 
   ngOnInit() {
@@ -56,7 +59,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (typeof this._zoekterm !== "undefined") {
       this._dataService.search(this._zoekterm)
         .subscribe(response => {
-          console.log(response);
+          // console.log(response);
           if (response.aquabrowser.results !== undefined) {
             this.resultaten = response.aquabrowser.results[0].result;
           }
@@ -112,5 +115,12 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     else
       return a.authors[0].author[0]._;
+  }
+  openModal(id: string, url :string) {
+    this._modalService.open(id, url);
+  }
+
+  closeModal(id: string) {
+    this._modalService.close(id);
   }
 }
