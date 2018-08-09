@@ -15,7 +15,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { MaterialModule } from './material/material.module';
 
-import { IKeyboardLayouts, keyboardLayouts, MAT_KEYBOARD_LAYOUTS, MatKeyboardModule } from '@ngx-material-keyboard/core';
+import { MatKeyboardModule } from '@ngx-material-keyboard/core';
 
 import { AppComponent } from './app.component';
 
