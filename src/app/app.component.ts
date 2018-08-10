@@ -12,7 +12,6 @@ import { ModalService } from './modal.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-
   private _enterSubscription: Subscription;
   private _keyboardRef: MatKeyboardRef<MatKeyboardComponent>;
   private _zoekterm: string;
@@ -22,7 +21,6 @@ export class AppComponent implements OnInit, OnDestroy {
   public boekResultaat = [];
   public resultaat;
   displayedColumns: string[] = ['check', 'subloc', 'shelfmark', 'publication', 'status'];
-
 
   get zoekterm(): string {
     return this._zoekterm;
@@ -63,7 +61,6 @@ export class AppComponent implements OnInit, OnDestroy {
     if (typeof this._zoekterm !== "undefined") {
       this._dataService.search(this._zoekterm)
         .subscribe(response => {
-          console.log(response);
           if (response.aquabrowser.results !== undefined) {
             this.resultaten = response.aquabrowser.results[0].result;
           }
@@ -123,7 +120,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
   openModal(id: string, resultaat: any) {
-    console.log(resultaat);
     this.resultaat = resultaat;
     this.getAvailability(resultaat.frabl[0]._);
     this._modalService.open(id, resultaat['detail-page']);
@@ -137,12 +133,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this._dataService.getAvailability(frabl).subscribe(
       response => {
         this.boekResultaat = response.aquabrowser.locations[0].location[0].location[0].items[0].item;
-        console.log(response.aquabrowser.locations[0].location[0].location[0].items[0]);
       });
   }
 
   isAvailable(availabilty: string) {
-    console.log(availabilty);
     return availabilty;
   }
 

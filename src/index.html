@@ -14,5 +14,26 @@
 <body>
   <app-root></app-root>
 </body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+  $(function () {
+    var timer = null,
+      interval = 300000;
+
+    $("#startZoeken").click(function () {
+      if (timer !== null)
+        clearInterval(timer);
+
+      timer = setInterval(function () {
+        autoRefreshPage();
+      }, interval);
+    });
+  });
+
+  function autoRefreshPage() {
+    window.location = window.location.href;
+  }
+</script>
 
 </html>
