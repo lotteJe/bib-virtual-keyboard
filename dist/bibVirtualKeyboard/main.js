@@ -189,7 +189,7 @@ var AppComponent = /** @class */ (function () {
         return availabilty;
     };
     AppComponent.prototype.getIcon = function (icon) {
-        if (icon == "Aanwezig")
+        if (icon.toLowerCase().includes("aanwezig"))
             return true;
         else
             return false;

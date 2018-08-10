@@ -147,7 +147,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   getIcon(icon: string) {
-    if (icon == "Aanwezig")
+    if (icon.toLowerCase().includes("aanwezig"))
       return true;
     else return false;
   }
