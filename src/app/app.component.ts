@@ -19,6 +19,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public first = true;
   public resultaten = [];
+  public boekResultaat = [];
+  public resultaat;
+  displayedColumns: string[] = ['check', 'subloc', 'shelfmark', 'publication', 'status'];
+
 
   get zoekterm(): string {
     return this._zoekterm;
@@ -59,16 +63,16 @@ export class AppComponent implements OnInit, OnDestroy {
     if (typeof this._zoekterm !== "undefined") {
       this._dataService.search(this._zoekterm)
         .subscribe(response => {
-          // console.log(response);
+          console.log(response);
           if (response.aquabrowser.results !== undefined) {
             this.resultaten = response.aquabrowser.results[0].result;
           }
           else {
             this.resultaten.length = 0;
           }
+          this.first = false;
         });
     }
-    this.first = false;
   }
 
   isUndefined(authors) {
@@ -110,17 +114,41 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   getAuthor(a: any) {
-    if (a.authors[0]['main-author'] != undefined) {
-      return a.authors[0]['main-author'][0]._;
+    if (a != undefined) {
+      if (a.authors[0]['main-author'] != undefined) {
+        return a.authors[0]['main-author'][0]._;
+      }
+      else
+        return a.authors[0].author[0]._;
     }
-    else
-      return a.authors[0].author[0]._;
   }
-  openModal(id: string, url :string) {
-    this._modalService.open(id, url);
+  openModal(id: string, resultaat: any) {
+    console.log(resultaat);
+    this.resultaat = resultaat;
+    this.getAvailability(resultaat.frabl[0]._);
+    this._modalService.open(id, resultaat['detail-page']);
   }
 
   closeModal(id: string) {
     this._modalService.close(id);
+  }
+
+  getAvailability(frabl: string) {
+    this._dataService.getAvailability(frabl).subscribe(
+      response => {
+        this.boekResultaat = response.aquabrowser.locations[0].location[0].location[0].items[0].item;
+        console.log(response.aquabrowser.locations[0].location[0].location[0].items[0]);
+      });
+  }
+
+  isAvailable(availabilty: string) {
+    console.log(availabilty);
+    return availabilty;
+  }
+
+  getIcon(icon: string) {
+    if (icon == "Aanwezig")
+      return true;
+    else return false;
   }
 }

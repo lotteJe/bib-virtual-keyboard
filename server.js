@@ -11,7 +11,7 @@ app.use(express.static(__dirname + '/dist/bibVirtualKeyboard'));
 app.listen(process.env.PORT || 8080);
 
 app.route('/api/:search').get((req, res) => {
-    var url = 'http://gent.staging.aquabrowser.be/api/v1/search/?q=' + req.params['search'] + '&authorization=' + process.env.API_KEY;
+    var url = 'http://gent.staging.aquabrowser.be/api/v1/search/?q=' + req.params['search'] + '&authorization=' + process.env.API_KEY + '&branch=Oost-Vlaanderen/Gent/Hoofdbibliotheek';
     request.get(url, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             parseString(body, function (err, result) {
@@ -21,6 +21,20 @@ app.route('/api/:search').get((req, res) => {
             console.log(error);
         }
     });
+});
 
+app.route('/api/availability/:frabl').get((req, res) => {
+    var url = 'http://gent.staging.aquabrowser.be/api/v1/availability/?frabl=' + req.params['frabl'] + '&authorization=' + process.env.API_KEY + '&branch=Oost-Vlaanderen/Gent/Hoofdbibliotheek';
+    request.get(url, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            // console.log("call ontvangen");
+            // console.log(body);
+            parseString(body, function (err, result) {
+                res.send(result);
+            });
+        } else {
+            console.log(error)
+        }
+    });
 });
 

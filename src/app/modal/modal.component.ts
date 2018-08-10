@@ -56,6 +56,7 @@ export class ModalComponent implements OnInit, OnDestroy {
     // close modal
     close(): void {
         this.element.hide();
+        $("#frame").attr("src", "");
         $('body').removeClass('modal-open');
     }
 }

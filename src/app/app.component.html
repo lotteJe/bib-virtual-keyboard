@@ -39,21 +39,22 @@
               </mat-card-content>
               <mat-card-actions>
                 <!-- <a href="{{resultaat['detail-page']}}" target="_blank" mat-button>MEER INFO</a> -->
-                <button (click)="openModal('custom-modal',resultaat['detail-page'])" mat-button>MEER INFO</button>
+                <button (click)="openModal('custom-modal',resultaat)" mat-button>BESCHIKBAARHEID</button>
+                <!-- <p>{{getAvailability(resultaat.frabl[0]._)}}</p> -->
               </mat-card-actions>
               <!-- <div *ngIf="isArray(resultaat.types.type) as value; else elseBlockType">
-                <mat-chip-list>
-                  <mat-chip *ngFor="let t of resultaat.types.type" selected="true" color="warn">{{t}}</mat-chip>
-                </mat-chip-list>
-              </div>
-              <ng-template #elseBlockType>
-                <div>
                   <mat-chip-list>
-                    <mat-chip selected="true" color="warn"> {{resultaat.types.type}}
-                    </mat-chip>
+                    <mat-chip *ngFor="let t of resultaat.types.type" selected="true" color="warn">{{t}}</mat-chip>
                   </mat-chip-list>
                 </div>
-              </ng-template>-->
+                <ng-template #elseBlockType>
+                  <div>
+                    <mat-chip-list>
+                      <mat-chip selected="true" color="warn"> {{resultaat.types.type}}
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                </ng-template>-->
             </mat-card>
             <!--  </div>-->
           </ngxMasonryItem>
@@ -62,8 +63,49 @@
         <modal id="custom-modal">
           <div class="modal">
             <div class="modal-body">
-              <iframe id="frame" frameborder="0" width="100%" height="100%"></iframe>
-              <button (click)="closeModal('custom-modal');" id="close"><mat-icon>close</mat-icon></button>
+              <!-- <iframe id="frame" frameborder="0" width="100%" height="100%"></iframe> -->
+              <div *ngIf="boekResultaat">
+                <p class="mat-tab-label">{{resultaat?.titles[0].title[0]._}} - {{getAuthor(resultaat)}}
+                </p>
+                <mat-table [dataSource]="boekResultaat" class="mat-elevation-z8">
+                  <ng-container matColumnDef="check">
+                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                      <ng-template [ngIf]="getIcon(element.status[0])" [ngIfElse]="loggedOut">
+                        <mat-icon class="check">check</mat-icon>
+                      </ng-template>
+                      <ng-template #loggedOut>
+                        <mat-icon class="close">close</mat-icon>
+                      </ng-template>
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="subloc">
+                    <mat-header-cell *matHeaderCellDef> Plaats </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.subloc[0]}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="shelfmark">
+                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.shelfmark[0]}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="publication">
+                    <mat-header-cell *matHeaderCellDef> Uitgave </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.publication[0]._}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef> Beschikbaarheid </mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.status[0]}}</mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+              </div>
+              <button (click)="closeModal('custom-modal');" id="close">
+                <mat-icon>close</mat-icon>
+              </button>
             </div>
           </div>
           <div class="modal-background"></div>
